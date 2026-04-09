@@ -1,7 +1,5 @@
 <script setup lang="ts">
-defineEmits<{
-  onClick: [];
-}>();
+defineEmits(['onClick']);
 </script>
 
 <template>
