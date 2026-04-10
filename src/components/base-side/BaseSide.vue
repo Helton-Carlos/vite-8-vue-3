@@ -1,6 +1,26 @@
 <script setup lang="ts">
 import BaseButton from '../base-button/BaseButton.vue';
+import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
+import type { IconTypes } from './types';
+
+const paths = ref<IconTypes[]>([
+  {
+    title: 'Item 1',
+    path: 'item-1',
+    icon: 'cil:file',
+  },
+  {
+    title: 'Item 2',
+    path: 'item-2',
+    icon: 'cil:locomotive',
+  },
+  {
+    title: 'Item 3',
+    path: 'item-3',
+    icon: 'cil:locomotive',
+  },
+]);
 </script>
 
 <template>
@@ -10,31 +30,16 @@ import { Icon } from '@iconify/vue';
     </h1>
 
     <ul class="flex-1 mt-8">
-      <li>
+      <li
+        v-for="item in paths"
+        :key="item.title"
+      >
         <a>
           <Icon
             class="icon"
-            icon="cil:file"
+            :icon="item.icon"
           />
-          Item 2
-        </a>
-      </li>
-      <li>
-        <a>
-          <Icon
-            class="icon"
-            icon="cil:locomotive"
-          />
-          Item 1
-        </a>
-      </li>
-      <li>
-        <a>
-          <Icon
-            class="icon"
-            icon="cil:locomotive"
-          />
-          Item 3
+          {{ item.title }}
         </a>
       </li>
     </ul>
