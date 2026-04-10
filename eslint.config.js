@@ -31,4 +31,10 @@ export default [
       },
     },
   },
+  {
+    files: ['src/view/**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 ];
