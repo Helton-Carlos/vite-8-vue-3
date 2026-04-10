@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import BaseButton from './components/BaseButton.vue';
-import BaseDropdown from './components/BaseDropdown.vue';
+import BaseButton from './components/base-button/BaseButton.vue';
+import BaseDropdown from './components/base-dropdown/BaseDropdown.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const dropDown = [
   {
@@ -10,7 +13,7 @@ const dropDown = [
 ];
 
 function click() {
-  alert('hey');
+  router.push('/dashboard');
 }
 </script>
 
@@ -40,9 +43,11 @@ function click() {
         </div>
       </div>
     </div>
+
     <div class="navbar-center">
       <a class="btn btn-ghost text-xl">Vite-8</a>
     </div>
+
     <div class="navbar-end">
       <BaseDropdown
         title="Menu"

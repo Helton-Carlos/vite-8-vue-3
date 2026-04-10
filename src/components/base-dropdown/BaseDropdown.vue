@@ -1,8 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  title: string;
-  itens: { path: string; name: string }[];
-}>();
+import type { DropDown } from './types';
+
+defineProps<DropDown>();
 </script>
 
 <template>
