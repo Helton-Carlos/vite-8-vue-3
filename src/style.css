@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@layer components {
+  .icon {
+    @apply size-4;
+  }
+}
