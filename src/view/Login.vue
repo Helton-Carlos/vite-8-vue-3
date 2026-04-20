@@ -5,14 +5,12 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 function click() {
-  router.push({ name: "login" });
+  router.push({ name: "dashboard" });
 }
 </script>
 
 <template>
-  <div class="flex">
-    <BaseButton @on-click="click">
-      Enviar alerta
-    </BaseButton>
-  </div>
+  <BaseButton @on-click="click">
+    {{ $route.name }}
+  </BaseButton>
 </template>

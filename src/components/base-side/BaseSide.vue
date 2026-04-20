@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import BaseButton from '../base-button/BaseButton.vue';
-import { ref } from 'vue';
-import { Icon } from '@iconify/vue';
-import type { IconTypes } from './types';
+import { ref } from "vue";
+import { Icon } from "@iconify/vue";
+import type { IconTypes } from "./types";
 
 const paths = ref<IconTypes[]>([
   {
-    title: 'Item 1',
-    path: 'item-1',
-    icon: 'cil:file',
+    title: "Item 1",
+    path: "item-1",
+    icon: "cil:file",
   },
   {
-    title: 'Item 2',
-    path: 'item-2',
-    icon: 'cil:locomotive',
+    title: "Item 2",
+    path: "item-2",
+    icon: "cil:locomotive",
   },
   {
-    title: 'Item 3',
-    path: 'item-3',
-    icon: 'cil:locomotive',
+    title: "Item 3",
+    path: "item-3",
+    icon: "cil:locomotive",
   },
 ]);
 </script>
@@ -44,12 +43,15 @@ const paths = ref<IconTypes[]>([
       </li>
     </ul>
 
-    <BaseButton class="flex items-center gap-4 m-10">
+    <RouterLink
+      to="/login"
+      class="flex items-center gap-4 m-10 btn"
+    >
       <Icon
         class="icon"
         icon="cil:exit-to-app"
       />
       Sair
-    </BaseButton>
+    </RouterLink>
   </div>
 </template>

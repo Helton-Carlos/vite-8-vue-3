@@ -1,19 +1,19 @@
-import { createMemoryHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from "vue-router";
 
 const routes = [
   {
-    path: '/Dashboard',
-    name: 'dashboard',
-    component: () => import('../view/Dashboard.vue'),
+    path: "/",
+    name: "dashboard",
+    component: () => import("../view/Dashboard.vue"),
   },
   {
-    path: '/About',
-    name: 'about',
-    component: () => import('../view/About.vue'),
+    path: "/login",
+    name: "login",
+    component: () => import("../view/Login.vue"),
   },
 ];
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
