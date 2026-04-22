@@ -1,9 +1,14 @@
 <script setup lang="ts">
-defineEmits(['onClick']);
+defineProps<{
+  type?: "button" | "submit" | "reset";
+}>();
+
+defineEmits(["onClick"]);
 </script>
 
 <template>
   <button
+    :type="type"
     class="btn btn-success"
     @click="$emit('onClick')"
   >
