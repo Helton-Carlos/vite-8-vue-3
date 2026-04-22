@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  type?: "button" | "submit" | "reset";
-}>();
+import type { Button } from "./types";
+
+defineProps<Button>();
 
 defineEmits(["onClick"]);
 </script>
