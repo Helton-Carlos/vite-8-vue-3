@@ -3,5 +3,5 @@ import { useRouter } from "vue-router";
 </script>
 
 <template>
-  <div class="m-8"></div>
+  <div class="m-8" />
 </template>

@@ -30,3 +30,14 @@ export const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, _from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const user = localStorage.getItem("user");
+
+  if (requiresAuth && !user) {
+    next("/login");
+  } else {
+    next();
+  }
+});
