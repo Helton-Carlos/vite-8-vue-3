@@ -1,33 +1,39 @@
 <script setup lang="ts">
-import BaseButton from "../components/base-button/BaseButton.vue";
-import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { Chart, Grid, Line } from "vue3-charts";
+import { plByMonth } from "../utils/chart";
 
-const router = useRouter();
+const data = ref(plByMonth);
+const margin = ref({
+  left: 0,
+  top: 20,
+  right: 20,
+  bottom: 0,
+});
 </script>
 
 <template>
   <div class="m-8">
-    <div class="card bg-base-100 w-96 shadow-sm">
-      <figure>
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-          alt="Shoes"
-        >
-      </figure>
+    <Chart
+      :size="{ width: 700, height: 250 }"
+      :data="data"
+      :margin="margin"
+    >
+      <template #layers>
+        <Grid stroke-dasharray="2,2" />
+        <Line :data-keys="['name', 'pl']" />
+      </template>
+    </Chart>
 
-      <div class="card-body">
-        <h2 class="card-title">
-          Card Title
-        </h2>
-        <p>
-          A card component has a figure, a body part, and inside body there are
-          title and actions parts
-        </p>
-
-        <BaseButton @click="router.push({ name: 'login' })">
-          Login
-        </BaseButton>
-      </div>
-    </div>
+    <Chart
+      :size="{ width: 700, height: 250 }"
+      :data="data"
+      :margin="margin"
+    >
+      <template #layers>
+        <Grid stroke-dasharray="2,2" />
+        <Line :data-keys="['name', 'pl']" />
+      </template>
+    </Chart>
   </div>
 </template>
