@@ -4,11 +4,11 @@ import BaseTitlePage from "./components/base-title-page/BaseTitlePage.vue";
 </script>
 
 <template>
-  <div :class="$route.name !== 'login' ? 'flex' : 'block'">
-    <BaseSide v-if="$route.name !== 'login'" />
+  <div :class="$route?.name !== 'login' ? 'flex' : 'block'">
+    <BaseSide v-if="$route?.name !== 'login'" />
 
     <div>
-      <BaseTitlePage v-if="$route.name !== 'login'" />
+      <BaseTitlePage v-if="$route?.name !== 'login'" />
       <div class="m-8">
         <RouterView />
       </div>

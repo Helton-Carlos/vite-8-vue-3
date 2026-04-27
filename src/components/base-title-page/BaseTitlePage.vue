@@ -5,7 +5,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 
 const title = computed(() => {
-  return route.meta.title || "Dashboard";
+  return route?.meta?.title || "Dashboard";
 });
 </script>
 
