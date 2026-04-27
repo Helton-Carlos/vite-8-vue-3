@@ -13,7 +13,7 @@ describe("App.vue", () => {
           }),
         ],
         mocks: {
-          $route: { name: "home" },
+          $route: { name: "dashboard" },
         },
         stubs: ["router-link", "router-view"],
       },
