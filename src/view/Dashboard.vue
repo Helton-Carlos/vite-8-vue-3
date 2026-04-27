@@ -13,23 +13,15 @@ const margin = ref({
 </script>
 
 <template>
-  <div class="m-8">
-    <Chart
-      :size="{ width: 700, height: 250 }"
-      :data="data"
-      :margin="margin"
-    >
+  <div>
+    <Chart :size="{ width: 700, height: 250 }" :data="data" :margin="margin">
       <template #layers>
         <Grid stroke-dasharray="2,2" />
         <Line :data-keys="['name', 'pl']" />
       </template>
     </Chart>
 
-    <Chart
-      :size="{ width: 700, height: 250 }"
-      :data="data"
-      :margin="margin"
-    >
+    <Chart :size="{ width: 700, height: 250 }" :data="data" :margin="margin">
       <template #layers>
         <Grid stroke-dasharray="2,2" />
         <Line :data-keys="['name', 'pl']" />

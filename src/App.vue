@@ -9,7 +9,9 @@ import BaseTitlePage from "./components/base-title-page/BaseTitlePage.vue";
 
     <div>
       <BaseTitlePage v-if="$route.name !== 'login'" />
-      <RouterView />
+      <div class="m-8">
+        <RouterView />
+      </div>
     </div>
   </div>
 </template>

@@ -30,12 +30,8 @@ const axis = ref({
 </script>
 
 <template>
-  <div class="m-8 flex gap-7">
-    <Chart
-      :size="{ width: 700, height: 250 }"
-      :data="data"
-      :margin="margin"
-    >
+  <div class="flex gap-7">
+    <Chart :size="{ width: 700, height: 250 }" :data="data" :margin="margin">
       <template #layers>
         <Grid stroke-dasharray="2,2" />
         <Line :data-keys="['name', 'pl']" />
