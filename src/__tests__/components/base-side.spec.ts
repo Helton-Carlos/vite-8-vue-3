@@ -1,5 +1,5 @@
-import { render, fireEvent, screen } from "@testing-library/vue";
-import { describe, expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/vue";
+import { describe, expect, test } from "vitest";
 import BaseSide from "../../components/base-side/BaseSide.vue";
 import { createTestingPinia } from "@pinia/testing";
 import { router } from "../../router";
