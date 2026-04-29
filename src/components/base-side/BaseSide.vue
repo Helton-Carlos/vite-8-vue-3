@@ -43,19 +43,33 @@ function handleLogout() {
 
 <template>
   <div class="w-[285px] h-dvh menu bg-base-200 rounded-box">
-    <h1 class="text-lg font-bold text-center my-8">Full projet</h1>
+    <h1 class="text-lg font-bold text-center my-8">
+      Full projet
+    </h1>
 
     <ul class="flex-1 mt-8">
-      <li v-for="item in paths" :key="item.title">
+      <li
+        v-for="item in paths"
+        :key="item.title"
+      >
         <router-link :to="item.path">
-          <Icon class="icon" :icon="item.icon" />
+          <Icon
+            class="icon"
+            :icon="item.icon"
+          />
           {{ item.title }}
         </router-link>
       </li>
     </ul>
 
-    <BaseButton class="m-10" @click="handleLogout">
-      <Icon class="icon" icon="cil:exit-to-app" />
+    <BaseButton
+      class="m-10"
+      @click="handleLogout"
+    >
+      <Icon
+        class="icon"
+        icon="cil:exit-to-app"
+      />
       Sair
     </BaseButton>
   </div>
