@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: aqua --default, dark --prefersdark;
+  themes: aqua --default, dark --prefersdark, light, dracula, forest, night;
 }
 
 @layer components {
