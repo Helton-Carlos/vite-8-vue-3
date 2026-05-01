@@ -39,7 +39,7 @@ function handleLogout() {
 
 <template>
   <aside
-    class="w-[260px] min-h-dvh flex flex-col bg-base-200 border-r border-base-300"
+    class="w-[260px] h-dvh sticky top-0 flex flex-col bg-base-200 border-r border-base-300 overflow-y-auto"
   >
     <div class="flex items-center gap-3 px-6 py-6">
       <div class="bg-primary rounded-xl p-2">
