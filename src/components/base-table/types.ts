@@ -3,8 +3,5 @@ export interface TableColumn {
   label: string;
   width?: number;
 }
-export interface TableRow {
-  id: number;
-  month: string;
-  number: number;
-}
+
+export type TableRow = Record<string, unknown>;

@@ -1,0 +1,145 @@
+export interface FeedingRecord {
+  id: number;
+  tankId: number;
+  tankName: string;
+  speciesName: string;
+  feedType: string;
+  quantityKg: number;
+  date: string;
+  time: string;
+  responsible: string;
+  observations: string;
+}
+
+export const feedingRecords: FeedingRecord[] = [
+  {
+    id: 1,
+    tankId: 1,
+    tankName: 'Tanque A1',
+    speciesName: 'Tilápia',
+    feedType: 'Ração extrusada 32%',
+    quantityKg: 25,
+    date: '2026-05-01',
+    time: '07:00',
+    responsible: 'João Silva',
+    observations: 'Peixes alimentando-se normalmente',
+  },
+  {
+    id: 2,
+    tankId: 1,
+    tankName: 'Tanque A1',
+    speciesName: 'Tilápia',
+    feedType: 'Ração extrusada 32%',
+    quantityKg: 25,
+    date: '2026-05-01',
+    time: '12:00',
+    responsible: 'João Silva',
+    observations: '',
+  },
+  {
+    id: 3,
+    tankId: 1,
+    tankName: 'Tanque A1',
+    speciesName: 'Tilápia',
+    feedType: 'Ração extrusada 32%',
+    quantityKg: 20,
+    date: '2026-05-01',
+    time: '17:00',
+    responsible: 'Maria Santos',
+    observations: '',
+  },
+  {
+    id: 4,
+    tankId: 2,
+    tankName: 'Tanque A2',
+    speciesName: 'Tilápia',
+    feedType: 'Ração extrusada 32%',
+    quantityKg: 23,
+    date: '2026-05-01',
+    time: '07:00',
+    responsible: 'João Silva',
+    observations: '',
+  },
+  {
+    id: 5,
+    tankId: 3,
+    tankName: 'Tanque B1',
+    speciesName: 'Tambaqui',
+    feedType: 'Ração extrusada 28%',
+    quantityKg: 18,
+    date: '2026-05-01',
+    time: '07:30',
+    responsible: 'Carlos Oliveira',
+    observations: 'Reduzir quantidade na próxima alimentação',
+  },
+  {
+    id: 6,
+    tankId: 5,
+    tankName: 'Tanque-Rede C1',
+    speciesName: 'Pintado',
+    feedType: 'Ração carnívora 40%',
+    quantityKg: 8,
+    date: '2026-05-01',
+    time: '08:00',
+    responsible: 'Carlos Oliveira',
+    observations: '',
+  },
+  {
+    id: 7,
+    tankId: 6,
+    tankName: 'Raceway D1',
+    speciesName: 'Pirarucu',
+    feedType: 'Ração carnívora 45%',
+    quantityKg: 15,
+    date: '2026-05-01',
+    time: '08:30',
+    responsible: 'Maria Santos',
+    observations: 'Peixes com apetite elevado',
+  },
+  {
+    id: 8,
+    tankId: 3,
+    tankName: 'Tanque B1',
+    speciesName: 'Tambaqui',
+    feedType: 'Ração extrusada 28%',
+    quantityKg: 15,
+    date: '2026-04-30',
+    time: '07:30',
+    responsible: 'João Silva',
+    observations: '',
+  },
+  {
+    id: 9,
+    tankId: 2,
+    tankName: 'Tanque A2',
+    speciesName: 'Tilápia',
+    feedType: 'Ração extrusada 32%',
+    quantityKg: 23,
+    date: '2026-04-30',
+    time: '12:00',
+    responsible: 'Maria Santos',
+    observations: '',
+  },
+  {
+    id: 10,
+    tankId: 6,
+    tankName: 'Raceway D1',
+    speciesName: 'Pirarucu',
+    feedType: 'Ração carnívora 45%',
+    quantityKg: 14,
+    date: '2026-04-30',
+    time: '08:30',
+    responsible: 'Carlos Oliveira',
+    observations: '',
+  },
+];
+
+export const feedingSummaryByMonth = [
+  { name: 'Out', totalKg: 1800, custoRS: 5400 },
+  { name: 'Nov', totalKg: 2100, custoRS: 6300 },
+  { name: 'Dez', totalKg: 2400, custoRS: 7200 },
+  { name: 'Jan', totalKg: 2600, custoRS: 7800 },
+  { name: 'Fev', totalKg: 2500, custoRS: 7500 },
+  { name: 'Mar', totalKg: 2700, custoRS: 8100 },
+  { name: 'Abr', totalKg: 2900, custoRS: 8700 },
+];

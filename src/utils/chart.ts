@@ -1,9 +1,9 @@
 export const plByMonth = [
-  { name: "Jan", pl: 1000, avg: 500, inc: 300 },
-  { name: "Feb", pl: 2000, avg: 900, inc: 400 },
-  { name: "Apr", pl: 400, avg: 400, inc: 500 },
-  { name: "Mar", pl: 3100, avg: 1300, inc: 700 },
-  { name: "May", pl: 200, avg: 100, inc: 200 },
-  { name: "Jun", pl: 600, avg: 400, inc: 300 },
-  { name: "Jul", pl: 500, avg: 90, inc: 100 },
+  { name: 'Out', pl: 1800, avg: 1200, inc: 600 },
+  { name: 'Nov', pl: 2100, avg: 1400, inc: 700 },
+  { name: 'Dez', pl: 2400, avg: 1600, inc: 800 },
+  { name: 'Jan', pl: 2600, avg: 1800, inc: 800 },
+  { name: 'Fev', pl: 2500, avg: 1700, inc: 800 },
+  { name: 'Mar', pl: 2700, avg: 1900, inc: 800 },
+  { name: 'Abr', pl: 2900, avg: 2000, inc: 900 },
 ];
