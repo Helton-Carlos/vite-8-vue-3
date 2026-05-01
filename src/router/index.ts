@@ -1,28 +1,46 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from 'vue-router';
 
 const routes = [
   {
-    path: "/",
-    name: "dashboard",
-    component: () => import("../view/Dashboard.vue"),
-    meta: { requiresAuth: true, title: "Bem-vindo(a)" },
+    path: '/',
+    name: 'dashboard',
+    component: () => import('../view/Dashboard.vue'),
+    meta: { requiresAuth: true, title: 'Dashboard' },
   },
   {
-    path: "/listagem",
-    name: "listagem",
-    component: () => import("../view/Listagem.vue"),
-    meta: { requiresAuth: true, title: "Listagem" },
+    path: '/tanques',
+    name: 'tanques',
+    component: () => import('../view/Tanques.vue'),
+    meta: { requiresAuth: true, title: 'Tanques' },
   },
   {
-    path: "/graficos",
-    name: "graficos",
-    component: () => import("../view/Graficos.vue"),
-    meta: { requiresAuth: true, title: "Gráficos" },
+    path: '/especies',
+    name: 'especies',
+    component: () => import('../view/Especies.vue'),
+    meta: { requiresAuth: true, title: 'Espécies' },
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("../view/Login.vue"),
+    path: '/alimentacao',
+    name: 'alimentacao',
+    component: () => import('../view/Alimentacao.vue'),
+    meta: { requiresAuth: true, title: 'Alimentação' },
+  },
+  {
+    path: '/qualidade-agua',
+    name: 'qualidade-agua',
+    component: () => import('../view/QualidadeAgua.vue'),
+    meta: { requiresAuth: true, title: 'Qualidade da Água' },
+  },
+  {
+    path: '/colheitas',
+    name: 'colheitas',
+    component: () => import('../view/Colheitas.vue'),
+    meta: { requiresAuth: true, title: 'Colheitas' },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../view/Login.vue'),
   },
 ];
 
@@ -33,10 +51,10 @@ export const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem('user');
 
   if (requiresAuth && !user) {
-    next("/login");
+    next('/login');
   } else {
     next();
   }
