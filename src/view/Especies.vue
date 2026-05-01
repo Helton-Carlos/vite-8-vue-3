@@ -87,15 +87,42 @@ function saveSpecies() {
   closeForm();
 }
 
-function removeSpecies(id: number) {
-  species.value = species.value.filter((s) => s.id !== id);
-  toast.success('Espécie removida', { position: toast.POSITION.BOTTOM_RIGHT });
+const deleteTargetId = ref<number | null>(null);
+
+function openDeleteConfirm(id: number) {
+  deleteTargetId.value = id;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.showModal();
+}
+
+function confirmDelete() {
+  if (deleteTargetId.value !== null) {
+    species.value = species.value.filter((s) => s.id !== deleteTargetId.value);
+    toast.success('Espécie removida', {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    deleteTargetId.value = null;
+  }
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
+}
+
+function cancelDelete() {
+  deleteTargetId.value = null;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
 }
 </script>
 
 <template>
   <div class="space-y-6">
-    <div class="flex justify-end">
+    <div>
       <BaseButton @click="openForm">
         <Icon
           icon="mdi:plus"
@@ -122,9 +149,7 @@ function removeSpecies(id: number) {
               </p>
             </div>
             <BaseBadge :variant="sp.status === 'ativo' ? 'success' : 'ghost'">
-              {{
-                sp.status
-              }}
+              {{ sp.status }}
             </BaseBadge>
           </div>
 
@@ -197,10 +222,10 @@ function removeSpecies(id: number) {
             </div>
           </div>
 
-          <div class="flex items-center gap-1.5 text-xs opacity-60 mt-1">
+          <div class="flex items-center gap-2 text-xs opacity-60 mt-1">
             <Icon
               icon="mdi:food-drumstick"
-              class="size-3.5"
+              class="size-5"
             />
             {{ sp.feedType }}
           </div>
@@ -208,12 +233,16 @@ function removeSpecies(id: number) {
           <div class="card-actions justify-end mt-1">
             <button
               class="btn btn-xs btn-ghost opacity-50 hover:opacity-100"
-              @click="removeSpecies(sp.id)"
+              @click="openDeleteConfirm(sp.id)"
             >
               <Icon
                 icon="mdi:delete-outline"
                 class="size-4 text-error"
               />
+
+              <p class="text-base text-error">
+                excluir
+              </p>
             </button>
           </div>
         </div>
@@ -334,5 +363,46 @@ function removeSpecies(id: number) {
         </BaseButton>
       </div>
     </BaseModal>
+
+    <dialog
+      id="delete-confirm-modal"
+      class="modal modal-bottom sm:modal-middle"
+    >
+      <div class="modal-box bg-base-200">
+        <h3 class="text-lg font-bold mb-2">
+          Confirmar exclusão
+        </h3>
+        <p class="text-sm opacity-70">
+          Tem certeza que deseja excluir esta espécie? Esta ação não pode ser
+          desfeita.
+        </p>
+        <div class="modal-action">
+          <button
+            class="btn btn-ghost"
+            @click="cancelDelete"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-error"
+            @click="confirmDelete"
+          >
+            <Icon
+              icon="mdi:delete-outline"
+              class="size-4"
+            />
+            Excluir
+          </button>
+        </div>
+      </div>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button @click="cancelDelete">
+          close
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>

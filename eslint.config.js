@@ -4,6 +4,7 @@ import tseslint from 'typescript-eslint';
 import vueParser from 'vue-eslint-parser';
 
 export default [
+  { ignores: ['dist/**', 'node_modules/**'] },
   ...pluginVue.configs['flat/recommended'],
   {
     files: ['**/*.ts'],
@@ -23,6 +24,8 @@ export default [
     rules: {
       'vue/multi-word-component-names': 'error',
       'vue/no-unused-vars': 'error',
+      'vue/require-prop-types': 'off',
+      'vue/require-default-prop': 'off',
     },
     languageOptions: {
       sourceType: 'module',

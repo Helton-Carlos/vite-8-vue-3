@@ -10,6 +10,7 @@ const store = useStore();
 const router = useRouter();
 const email = ref('');
 const password = ref('');
+const showPassword = ref(false);
 
 function submit() {
   if (!email.value || !password.value) {
@@ -114,10 +115,20 @@ function submit() {
           />
           <input
             v-model="password"
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
             placeholder="••••••••"
             class="grow"
           >
+          <button
+            type="button"
+            class="btn btn-ghost btn-xs btn-circle"
+            @click="showPassword = !showPassword"
+          >
+            <Icon
+              :icon="showPassword ? 'mdi:eye-off-outline' : 'mdi:eye-outline'"
+              class="size-4 opacity-40"
+            />
+          </button>
         </label>
       </div>
 

@@ -262,7 +262,7 @@ function saveHarvest() {
                 :key="row.id"
                 class="hover:bg-base-300/30 transition-colors"
               >
-                <td class="font-medium">
+                <td class="text-base font-medium">
                   {{ row.tankName }}
                 </td>
                 <td>{{ row.speciesName }}</td>
@@ -277,9 +277,7 @@ function saveHarvest() {
                 <td>{{ row.buyer }}</td>
                 <td>
                   <BaseBadge :variant="statusVariant[row.status]">
-                    {{
-                      row.status
-                    }}
+                    {{ row.status }}
                   </BaseBadge>
                 </td>
               </tr>

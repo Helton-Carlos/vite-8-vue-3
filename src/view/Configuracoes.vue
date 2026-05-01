@@ -120,9 +120,36 @@ function toggleUserActive(id: number) {
   }
 }
 
-function removeUser(id: number) {
-  users.value = users.value.filter((u) => u.id !== id);
-  toast.success('Usuário removido', { position: toast.POSITION.BOTTOM_RIGHT });
+const deleteTargetId = ref<number | null>(null);
+
+function openDeleteConfirm(id: number) {
+  deleteTargetId.value = id;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.showModal();
+}
+
+function confirmDelete() {
+  if (deleteTargetId.value !== null) {
+    users.value = users.value.filter((u) => u.id !== deleteTargetId.value);
+    toast.success('Usuário removido', {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    deleteTargetId.value = null;
+  }
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
+}
+
+function cancelDelete() {
+  deleteTargetId.value = null;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
 }
 </script>
 
@@ -257,14 +284,14 @@ function removeUser(id: number) {
             </select>
           </div>
 
-          <div class="mt-4 sm:mt-6">
+          <div>
             <BaseBadge
               :variant="roleVariant[store.userRole]"
               size="md"
             >
               <Icon
                 :icon="store.isAdmin ? 'mdi:shield-crown' : 'mdi:account'"
-                class="size-3.5"
+                class="size-5"
               />
               {{ store.userRole }}
             </BaseBadge>
@@ -407,12 +434,16 @@ function removeUser(id: number) {
                     <button
                       class="btn btn-xs btn-ghost opacity-50 hover:opacity-100"
                       title="Remover"
-                      @click="removeUser(u.id)"
+                      @click="openDeleteConfirm(u.id)"
                     >
                       <Icon
                         icon="mdi:delete-outline"
                         class="size-4 text-error"
                       />
+
+                      <p class="text-base text-error">
+                        excluir
+                      </p>
                     </button>
                   </div>
                 </td>
@@ -497,5 +528,46 @@ function removeUser(id: number) {
         </BaseButton>
       </div>
     </BaseModal>
+
+    <dialog
+      id="delete-confirm-modal"
+      class="modal modal-bottom sm:modal-middle"
+    >
+      <div class="modal-box bg-base-200">
+        <h3 class="text-lg font-bold mb-2">
+          Confirmar exclusão
+        </h3>
+        <p class="text-sm opacity-70">
+          Tem certeza que deseja excluir este usuário? Esta ação não pode ser
+          desfeita.
+        </p>
+        <div class="modal-action">
+          <button
+            class="btn btn-ghost"
+            @click="cancelDelete"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-error"
+            @click="confirmDelete"
+          >
+            <Icon
+              icon="mdi:delete-outline"
+              class="size-4"
+            />
+            Excluir
+          </button>
+        </div>
+      </div>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button @click="cancelDelete">
+          close
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>

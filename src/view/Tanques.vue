@@ -110,9 +110,34 @@ function saveTank() {
   closeForm();
 }
 
-function removeTank(id: number) {
-  tanks.value = tanks.value.filter((t) => t.id !== id);
-  toast.success('Tanque removido', { position: toast.POSITION.BOTTOM_RIGHT });
+const deleteTargetId = ref<number | null>(null);
+
+function openDeleteConfirm(id: number) {
+  deleteTargetId.value = id;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.showModal();
+}
+
+function confirmDelete() {
+  if (deleteTargetId.value !== null) {
+    tanks.value = tanks.value.filter((t) => t.id !== deleteTargetId.value);
+    toast.success('Tanque removido', { position: toast.POSITION.BOTTOM_RIGHT });
+    deleteTargetId.value = null;
+  }
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
+}
+
+function cancelDelete() {
+  deleteTargetId.value = null;
+  const modal = document.getElementById(
+    'delete-confirm-modal',
+  ) as HTMLDialogElement;
+  modal?.close();
 }
 </script>
 
@@ -123,7 +148,7 @@ function removeTank(id: number) {
         <button
           v-for="(count, status) in statusCounts"
           :key="status"
-          class="btn btn-sm gap-1.5 transition-all"
+          class="text-base btn btn-sm gap-2 px-4 transition-all rounded-4xl"
           :class="
             filterStatus === status ? 'btn-primary shadow-md' : 'btn-ghost'
           "
@@ -168,54 +193,52 @@ function removeTank(id: number) {
               </h3>
             </div>
             <BaseBadge :variant="statusVariant[tank.status]">
-              {{
-                tank.status
-              }}
+              {{ tank.status }}
             </BaseBadge>
           </div>
 
           <div class="divider my-1" />
 
           <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs">
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:cube-outline"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.type }}</span>
             </div>
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:water"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.volumeM3 }} m³</span>
             </div>
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:fish"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.speciesName }}</span>
             </div>
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:counter"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.fishCount.toLocaleString('pt-BR') }}</span>
             </div>
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:density-small"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.densityPerM3 }}/m³</span>
             </div>
-            <div class="flex items-center gap-1.5 opacity-70">
+            <div class="flex items-center gap-2 opacity-70">
               <Icon
                 icon="mdi:broom"
-                class="size-3.5"
+                class="size-5"
               />
               <span>{{ tank.lastCleaningDate }}</span>
             </div>
@@ -224,12 +247,16 @@ function removeTank(id: number) {
           <div class="card-actions justify-end mt-2">
             <button
               class="btn btn-xs btn-ghost opacity-50 hover:opacity-100"
-              @click="removeTank(tank.id)"
+              @click="openDeleteConfirm(tank.id)"
             >
               <Icon
                 icon="mdi:delete-outline"
                 class="size-4 text-error"
               />
+
+              <p class="text-base text-error">
+                excluir
+              </p>
             </button>
           </div>
         </div>
@@ -344,5 +371,46 @@ function removeTank(id: number) {
         </BaseButton>
       </div>
     </BaseModal>
+
+    <dialog
+      id="delete-confirm-modal"
+      class="modal modal-bottom sm:modal-middle"
+    >
+      <div class="modal-box bg-base-200">
+        <h3 class="text-lg font-bold mb-2">
+          Confirmar exclusão
+        </h3>
+        <p class="text-sm opacity-70">
+          Tem certeza que deseja excluir este tanque? Esta ação não pode ser
+          desfeita.
+        </p>
+        <div class="modal-action">
+          <button
+            class="btn btn-ghost"
+            @click="cancelDelete"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-error"
+            @click="confirmDelete"
+          >
+            <Icon
+              icon="mdi:delete-outline"
+              class="size-4"
+            />
+            Excluir
+          </button>
+        </div>
+      </div>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button @click="cancelDelete">
+          close
+        </button>
+      </form>
+    </dialog>
   </div>
 </template>

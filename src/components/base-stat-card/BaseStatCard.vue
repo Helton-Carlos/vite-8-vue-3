@@ -1,20 +1,26 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 
-defineProps<{
-  title: string;
-  value: string | number;
-  icon: string;
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'accent'
-    | 'info'
-    | 'success'
-    | 'warning'
-    | 'error';
-  description?: string;
-}>();
+withDefaults(
+  defineProps<{
+    title: string;
+    value: string | number;
+    icon: string;
+    color?:
+      | 'primary'
+      | 'secondary'
+      | 'accent'
+      | 'info'
+      | 'success'
+      | 'warning'
+      | 'error';
+    description?: string;
+  }>(),
+  {
+    color: 'primary',
+    description: undefined,
+  },
+);
 
 const colorClasses: Record<string, { text: string; bg: string }> = {
   primary: { text: 'text-primary', bg: 'bg-primary/10' },
@@ -43,7 +49,9 @@ const colorClasses: Record<string, { text: string; bg: string }> = {
         />
       </div>
       <div class="flex-1 min-w-0">
-        <p class="text-xs uppercase tracking-wide opacity-60 mb-0.5">
+        <p
+          class="text-base font-bold uppercase tracking-wide opacity-60 mb-0.5"
+        >
           {{ title }}
         </p>
         <p

@@ -4,7 +4,6 @@ import { Chart, Grid, Line } from 'vue3-charts';
 import { Icon } from '@iconify/vue';
 import BaseStatCard from '../components/base-stat-card/BaseStatCard.vue';
 import BaseTable from '../components/base-table/BaseTable.vue';
-import BaseBadge from '../components/base-badge/BaseBadge.vue';
 import {
   dashboardStats,
   mortalityByMonth,
