@@ -34,12 +34,12 @@ const activityIcons: Record<string, string> = {
   maintenance: 'mdi:wrench',
 };
 
-const activityColors: Record<string, string> = {
-  feeding: 'text-info',
-  water: 'text-primary',
-  harvest: 'text-success',
-  alert: 'text-warning',
-  maintenance: 'text-secondary',
+const activityBg: Record<string, string> = {
+  feeding: 'bg-info/10 text-info',
+  water: 'bg-primary/10 text-primary',
+  harvest: 'bg-success/10 text-success',
+  alert: 'bg-warning/10 text-warning',
+  maintenance: 'bg-secondary/10 text-secondary',
 };
 
 const alertColumns = [
@@ -86,9 +86,15 @@ const alertColumns = [
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
-          <h2 class="card-title text-sm">Crescimento Médio (kg)</h2>
+          <h2 class="card-title text-sm font-semibold">
+            <Icon
+              icon="mdi:trending-up"
+              class="size-4 text-success"
+            />
+            Crescimento Médio (kg)
+          </h2>
           <Chart
             :size="{ width: 500, height: 220 }"
             :data="growth"
@@ -103,12 +109,23 @@ const alertColumns = [
               />
             </template>
           </Chart>
+          <div class="flex gap-4 text-xs opacity-60 mt-1">
+            <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-current inline-block" /> Real</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-success inline-block border-dashed" />
+              Meta</span>
+          </div>
         </div>
       </div>
 
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
-          <h2 class="card-title text-sm">Mortalidade Mensal</h2>
+          <h2 class="card-title text-sm font-semibold">
+            <Icon
+              icon="mdi:trending-down"
+              class="size-4 text-error"
+            />
+            Mortalidade Mensal
+          </h2>
           <Chart
             :size="{ width: 500, height: 220 }"
             :data="mortality"
@@ -127,38 +144,51 @@ const alertColumns = [
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
-          <h2 class="card-title text-sm">Alertas de Qualidade da Água</h2>
-          <div class="overflow-x-auto">
-            <BaseTable :columns="alertColumns" :rows="alerts">
-              <template #cell-status="{ value }">
-                <BaseBadge :variant="value === 'crítico' ? 'error' : 'warning'">
-                  {{ value }}
-                </BaseBadge>
-              </template>
-            </BaseTable>
-          </div>
+          <h2 class="card-title text-sm font-semibold">
+            <Icon
+              icon="mdi:alert-outline"
+              class="size-4 text-warning"
+            />
+            Alertas de Qualidade da Água
+          </h2>
+          <BaseTable
+            :columns="alertColumns"
+            :rows="alerts"
+          />
         </div>
       </div>
 
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
-          <h2 class="card-title text-sm">Atividades Recentes</h2>
-          <ul class="space-y-3 mt-2">
+          <h2 class="card-title text-sm font-semibold">
+            <Icon
+              icon="mdi:history"
+              class="size-4 text-info"
+            />
+            Atividades Recentes
+          </h2>
+          <ul class="space-y-2 mt-2">
             <li
               v-for="activity in activities"
               :key="activity.id"
-              class="flex items-start gap-3"
+              class="flex items-center gap-3 p-2.5 rounded-lg bg-base-300/30 hover:bg-base-300/50 transition-colors"
             >
-              <Icon
-                :icon="activityIcons[activity.type]"
-                class="size-5 mt-0.5"
-                :class="activityColors[activity.type]"
-              />
-              <div class="flex-1">
-                <p class="text-sm">{{ activity.message }}</p>
-                <p class="text-xs opacity-60">
+              <div
+                class="rounded-lg p-2"
+                :class="activityBg[activity.type]"
+              >
+                <Icon
+                  :icon="activityIcons[activity.type]"
+                  class="size-4"
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm truncate">
+                  {{ activity.message }}
+                </p>
+                <p class="text-xs opacity-50">
                   {{ activity.date }} às {{ activity.time }}
                 </p>
               </div>

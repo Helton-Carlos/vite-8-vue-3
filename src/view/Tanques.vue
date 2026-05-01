@@ -10,7 +10,6 @@ import { toast } from 'vue3-toastify';
 
 const tanks = ref<Tank[]>([...tanksList]);
 const filterStatus = ref<TankStatus | 'todos'>('todos');
-const showForm = ref(false);
 
 const form = ref<Partial<Tank>>({
   name: '',
@@ -47,6 +46,13 @@ const statusVariant: Record<
   vazio: 'ghost',
 };
 
+const statusIcon: Record<TankStatus, string> = {
+  ativo: 'mdi:check-circle',
+  manutenção: 'mdi:wrench',
+  quarentena: 'mdi:shield-alert',
+  vazio: 'mdi:circle-outline',
+};
+
 const statusCounts = computed(() => ({
   todos: tanks.value.length,
   ativo: tanks.value.filter((t) => t.status === 'ativo').length,
@@ -56,13 +62,11 @@ const statusCounts = computed(() => ({
 }));
 
 function openForm() {
-  showForm.value = true;
   const modal = document.getElementById('tank-modal') as HTMLDialogElement;
   modal?.showModal();
 }
 
 function closeForm() {
-  showForm.value = false;
   form.value = {
     name: '',
     type: 'escavado',
@@ -119,8 +123,10 @@ function removeTank(id: number) {
         <button
           v-for="(count, status) in statusCounts"
           :key="status"
-          class="btn btn-sm"
-          :class="filterStatus === status ? 'btn-primary' : 'btn-ghost'"
+          class="btn btn-sm gap-1.5 transition-all"
+          :class="
+            filterStatus === status ? 'btn-primary shadow-md' : 'btn-ghost'
+          "
           @click="filterStatus = status as TankStatus | 'todos'"
         >
           {{
@@ -128,11 +134,17 @@ function removeTank(id: number) {
               ? 'Todos'
               : status.charAt(0).toUpperCase() + status.slice(1)
           }}
-          <span class="badge badge-sm ml-1">{{ count }}</span>
+          <span
+            class="badge badge-xs"
+            :class="filterStatus === status ? 'badge-primary-content' : ''"
+          >{{ count }}</span>
         </button>
       </div>
       <BaseButton @click="openForm">
-        <Icon icon="mdi:plus" class="icon" />
+        <Icon
+          icon="mdi:plus"
+          class="icon"
+        />
         Novo Tanque
       </BaseButton>
     </div>
@@ -141,39 +153,83 @@ function removeTank(id: number) {
       <div
         v-for="tank in filteredTanks"
         :key="tank.id"
-        class="card bg-base-200 shadow-sm"
+        class="card bg-base-200 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
       >
         <div class="card-body p-4">
           <div class="flex items-center justify-between">
-            <h3 class="card-title text-sm">{{ tank.name }}</h3>
-            <BaseBadge :variant="statusVariant[tank.status]">{{
-              tank.status
-            }}</BaseBadge>
+            <div class="flex items-center gap-2">
+              <Icon
+                :icon="statusIcon[tank.status]"
+                class="size-4"
+                :class="`text-${statusVariant[tank.status]}`"
+              />
+              <h3 class="font-semibold text-sm">
+                {{ tank.name }}
+              </h3>
+            </div>
+            <BaseBadge :variant="statusVariant[tank.status]">
+              {{
+                tank.status
+              }}
+            </BaseBadge>
           </div>
-          <div class="text-xs space-y-1 mt-2 opacity-80">
-            <p><span class="font-semibold">Tipo:</span> {{ tank.type }}</p>
-            <p>
-              <span class="font-semibold">Volume:</span> {{ tank.volumeM3 }} m³
-            </p>
-            <p>
-              <span class="font-semibold">Espécie:</span> {{ tank.speciesName }}
-            </p>
-            <p>
-              <span class="font-semibold">Peixes:</span>
-              {{ tank.fishCount.toLocaleString('pt-BR') }}
-            </p>
-            <p>
-              <span class="font-semibold">Densidade:</span>
-              {{ tank.densityPerM3 }}/m³
-            </p>
-            <p>
-              <span class="font-semibold">Última limpeza:</span>
-              {{ tank.lastCleaningDate }}
-            </p>
+
+          <div class="divider my-1" />
+
+          <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:cube-outline"
+                class="size-3.5"
+              />
+              <span>{{ tank.type }}</span>
+            </div>
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:water"
+                class="size-3.5"
+              />
+              <span>{{ tank.volumeM3 }} m³</span>
+            </div>
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:fish"
+                class="size-3.5"
+              />
+              <span>{{ tank.speciesName }}</span>
+            </div>
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:counter"
+                class="size-3.5"
+              />
+              <span>{{ tank.fishCount.toLocaleString('pt-BR') }}</span>
+            </div>
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:density-small"
+                class="size-3.5"
+              />
+              <span>{{ tank.densityPerM3 }}/m³</span>
+            </div>
+            <div class="flex items-center gap-1.5 opacity-70">
+              <Icon
+                icon="mdi:broom"
+                class="size-3.5"
+              />
+              <span>{{ tank.lastCleaningDate }}</span>
+            </div>
           </div>
+
           <div class="card-actions justify-end mt-2">
-            <button class="btn btn-xs btn-ghost" @click="removeTank(tank.id)">
-              <Icon icon="mdi:delete-outline" class="size-4 text-error" />
+            <button
+              class="btn btn-xs btn-ghost opacity-50 hover:opacity-100"
+              @click="removeTank(tank.id)"
+            >
+              <Icon
+                icon="mdi:delete-outline"
+                class="size-4 text-error"
+              />
             </button>
           </div>
         </div>
@@ -182,73 +238,108 @@ function removeTank(id: number) {
 
     <div class="card bg-base-200 shadow-sm">
       <div class="card-body">
-        <h2 class="card-title text-sm">Visão em Tabela</h2>
-        <BaseTable :columns="columns" :rows="filteredTanks" />
+        <h2 class="card-title text-sm font-semibold">
+          <Icon
+            icon="mdi:table"
+            class="size-4 opacity-60"
+          />
+          Visão em Tabela
+        </h2>
+        <BaseTable
+          :columns="columns"
+          :rows="filteredTanks"
+        />
       </div>
     </div>
 
-    <BaseModal id="tank-modal" title="Novo Tanque" size="md" @close="closeForm">
+    <BaseModal
+      id="tank-modal"
+      title="Novo Tanque"
+      size="md"
+      @close="closeForm"
+    >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="form-control">
-          <label class="label"><span class="label-text">Nome *</span></label>
+          <label class="label"><span class="label-text text-xs font-medium">Nome *</span></label>
           <input
             v-model="form.name"
             type="text"
             placeholder="Ex: Tanque G1"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"><span class="label-text">Tipo</span></label>
-          <select v-model="form.type" class="select select-bordered w-full">
-            <option value="escavado">Escavado</option>
-            <option value="alvenaria">Alvenaria</option>
-            <option value="tanque-rede">Tanque-rede</option>
-            <option value="raceway">Raceway</option>
+          <label class="label"><span class="label-text text-xs font-medium">Tipo</span></label>
+          <select
+            v-model="form.type"
+            class="select select-bordered w-full"
+          >
+            <option value="escavado">
+              Escavado
+            </option>
+            <option value="alvenaria">
+              Alvenaria
+            </option>
+            <option value="tanque-rede">
+              Tanque-rede
+            </option>
+            <option value="raceway">
+              Raceway
+            </option>
           </select>
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text">Volume (m³) *</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Volume (m³) *</span></label>
           <input
             v-model.number="form.volumeM3"
             type="number"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"><span class="label-text">Espécie</span></label>
+          <label class="label"><span class="label-text text-xs font-medium">Espécie</span></label>
           <input
             v-model="form.speciesName"
             type="text"
             placeholder="Ex: Tilápia"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text">Qtd. Peixes</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Qtd. Peixes</span></label>
           <input
             v-model.number="form.fishCount"
             type="number"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"><span class="label-text">Status</span></label>
-          <select v-model="form.status" class="select select-bordered w-full">
-            <option value="vazio">Vazio</option>
-            <option value="ativo">Ativo</option>
-            <option value="manutenção">Manutenção</option>
-            <option value="quarentena">Quarentena</option>
+          <label class="label"><span class="label-text text-xs font-medium">Status</span></label>
+          <select
+            v-model="form.status"
+            class="select select-bordered w-full"
+          >
+            <option value="vazio">
+              Vazio
+            </option>
+            <option value="ativo">
+              Ativo
+            </option>
+            <option value="manutenção">
+              Manutenção
+            </option>
+            <option value="quarentena">
+              Quarentena
+            </option>
           </select>
         </div>
       </div>
       <div class="modal-action">
         <BaseButton @click="saveTank">
-          <Icon icon="mdi:content-save" class="icon" />
+          <Icon
+            icon="mdi:content-save"
+            class="icon"
+          />
           Salvar
         </BaseButton>
       </div>

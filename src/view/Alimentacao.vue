@@ -129,9 +129,15 @@ function saveFeeding() {
       />
     </div>
 
-    <div class="card bg-base-200 shadow-sm">
+    <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
       <div class="card-body">
-        <h2 class="card-title text-sm">Consumo de Ração Mensal (kg)</h2>
+        <h2 class="card-title text-sm font-semibold">
+          <Icon
+            icon="mdi:chart-line"
+            class="size-4 text-info"
+          />
+          Consumo de Ração Mensal (kg)
+        </h2>
         <Chart
           :size="{ width: 700, height: 220 }"
           :data="chartData"
@@ -147,15 +153,27 @@ function saveFeeding() {
 
     <div class="flex justify-end">
       <BaseButton @click="openForm">
-        <Icon icon="mdi:plus" class="icon" />
+        <Icon
+          icon="mdi:plus"
+          class="icon"
+        />
         Registrar Alimentação
       </BaseButton>
     </div>
 
     <div class="card bg-base-200 shadow-sm">
       <div class="card-body">
-        <h2 class="card-title text-sm">Histórico de Alimentação</h2>
-        <BaseTable :columns="columns" :rows="records" />
+        <h2 class="card-title text-sm font-semibold">
+          <Icon
+            icon="mdi:history"
+            class="size-4 opacity-60"
+          />
+          Histórico de Alimentação
+        </h2>
+        <BaseTable
+          :columns="columns"
+          :rows="records"
+        />
       </div>
     </div>
 
@@ -167,70 +185,71 @@ function saveFeeding() {
     >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="form-control">
-          <label class="label"><span class="label-text">Tanque *</span></label>
+          <label class="label"><span class="label-text text-xs font-medium">Tanque *</span></label>
           <select
             v-model.number="form.tankId"
             class="select select-bordered w-full"
           >
-            <option disabled :value="undefined">Selecione</option>
-            <option v-for="tank in activeTanks" :key="tank.id" :value="tank.id">
+            <option
+              disabled
+              :value="undefined"
+            >
+              Selecione
+            </option>
+            <option
+              v-for="tank in activeTanks"
+              :key="tank.id"
+              :value="tank.id"
+            >
               {{ tank.name }} ({{ tank.speciesName }})
             </option>
           </select>
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text">Tipo de Ração</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Tipo de Ração</span></label>
           <input
             v-model="form.feedType"
             type="text"
             placeholder="Ex: Ração extrusada 32%"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text">Quantidade (kg) *</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Quantidade (kg) *</span></label>
           <input
             v-model.number="form.quantityKg"
             type="number"
             step="0.5"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text">Responsável *</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Responsável *</span></label>
           <input
             v-model="form.responsible"
             type="text"
             placeholder="Nome"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"><span class="label-text">Data</span></label>
+          <label class="label"><span class="label-text text-xs font-medium">Data</span></label>
           <input
             v-model="form.date"
             type="date"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"><span class="label-text">Hora</span></label>
+          <label class="label"><span class="label-text text-xs font-medium">Hora</span></label>
           <input
             v-model="form.time"
             type="time"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control md:col-span-2">
-          <label class="label"
-            ><span class="label-text">Observações</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Observações</span></label>
           <textarea
             v-model="form.observations"
             class="textarea textarea-bordered w-full"
@@ -240,7 +259,10 @@ function saveFeeding() {
       </div>
       <div class="modal-action">
         <BaseButton @click="saveFeeding">
-          <Icon icon="mdi:content-save" class="icon" />
+          <Icon
+            icon="mdi:content-save"
+            class="icon"
+          />
           Salvar
         </BaseButton>
       </div>

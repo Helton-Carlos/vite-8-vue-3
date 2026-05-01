@@ -9,6 +9,8 @@ defineProps<{
     | 'warning'
     | 'error'
     | 'ghost';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  outline?: boolean;
 }>();
 
 const variantMap: Record<string, string> = {
@@ -21,10 +23,24 @@ const variantMap: Record<string, string> = {
   error: 'badge-error',
   ghost: 'badge-ghost',
 };
+
+const sizeMap: Record<string, string> = {
+  xs: 'badge-xs',
+  sm: 'badge-sm',
+  md: '',
+  lg: 'badge-lg',
+};
 </script>
 
 <template>
-  <span class="badge" :class="variantMap[variant || 'ghost']">
+  <span
+    class="badge gap-1 font-medium"
+    :class="[
+      variantMap[variant || 'ghost'],
+      sizeMap[size || 'sm'],
+      { 'badge-outline': outline },
+    ]"
+  >
     <slot />
   </span>
 </template>
