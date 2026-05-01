@@ -75,7 +75,7 @@ watch(
         <li v-for="item in paths" :key="item.title">
           <router-link
             :to="item.path"
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 cursor-pointer"
             :class="
               isActive(item.path)
                 ? 'bg-primary text-primary-content font-semibold shadow-md'
