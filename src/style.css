@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: aqua --default, dark --prefersdark, light, dracula, forest, night;
+  themes: light --default, dark --prefersdark, aqua, dracula, forest, night;
 }
 
 @layer components {
@@ -16,5 +16,14 @@
 
   body {
     @apply transition-colors duration-200;
+  }
+
+  .input:focus,
+  .input:focus-within,
+  .select:focus,
+  .textarea:focus {
+    outline: none !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
   }
 }

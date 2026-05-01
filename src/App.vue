@@ -15,7 +15,7 @@ const isRouteLogin = computed(() => route?.name === 'login');
 
     <div class="flex-1 min-h-dvh flex flex-col bg-base-100 overflow-y-auto">
       <BaseHeader v-if="!isRouteLogin" />
-      <main class="flex-1 p-6 lg:p-8">
+      <main class="flex-1 p-4 sm:p-6 lg:p-8">
         <RouterView />
       </main>
     </div>
