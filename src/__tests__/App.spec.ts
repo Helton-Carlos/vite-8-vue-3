@@ -5,17 +5,13 @@ import App from "../App.vue";
 
 describe("App.vue", () => {
   test("renders the app with default type", async () => {
-    const wrapper = await render(App, {
+    const wrapper = render(App, {
       global: {
         plugins: [
           createTestingPinia({
             stubActions: false,
           }),
         ],
-        mocks: {
-          $route: { name: "dashboard" },
-        },
-        stubs: ["router-link", "router-view"],
       },
     });
 

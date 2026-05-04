@@ -2,7 +2,6 @@ import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
   server: {
@@ -15,6 +14,7 @@ export default defineConfig({
       provider: "v8",
       exclude: ["**/*.{js,ts}"],
     },
+    setupFiles: ["./src/__tests__/utils/vitest.setup.ts"],
     environment: "happy-dom",
   },
 });
