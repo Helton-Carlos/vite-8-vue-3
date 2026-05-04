@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import BaseSide from './components/base-side/BaseSide.vue';
-import BaseHeader from './components/base-header/BaseHeader.vue';
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import BaseSide from "./components/base-side/BaseSide.vue";
+import BaseHeader from "./components/base-header/BaseHeader.vue";
 
 const route = useRoute();
 
-const isRouteLogin = computed(() => route?.name === 'login');
+const isRouteLogin = computed(() => route?.name === "login");
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const isRouteLogin = computed(() => route?.name === 'login');
 
     <div class="flex-1 min-h-dvh flex flex-col bg-base-100 overflow-y-auto">
       <BaseHeader v-if="!isRouteLogin" />
-      <main class="flex-1 p-4 sm:p-6 lg:p-8">
+      <main :class="['flex-1', { 'p-4 sm:p-6 lg:p-8': !isRouteLogin }]">
         <RouterView />
       </main>
     </div>
