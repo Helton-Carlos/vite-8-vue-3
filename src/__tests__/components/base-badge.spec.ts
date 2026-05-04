@@ -3,7 +3,7 @@ import { describe, expect, test } from "vitest";
 import BaseBadge from "../../components/base-badge/BaseBadge.vue";
 
 describe("BaseBadge.vue", () => {
-  test("renders the badge with default props", async () => {
+  test("renders the badge with props", async () => {
     const badge = await render(BaseBadge, {
       props: {
         variant: "primary",
@@ -15,7 +15,7 @@ describe("BaseBadge.vue", () => {
     expect(badge).toBeTruthy();
   });
 
-  test("renders the badge with slots", async () => {
+  test("renders the badge with class outline", async () => {
     const badge = render(BaseBadge, {
       slots: { default: "My Badge" },
       props: {
