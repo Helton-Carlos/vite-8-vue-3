@@ -58,10 +58,15 @@ watch(
   >
     <div class="flex items-center gap-3 px-6 py-6">
       <div class="bg-primary rounded-xl p-2">
-        <Icon icon="mdi:fish" class="size-6 text-primary-content" />
+        <Icon
+          icon="mdi:fish"
+          class="size-6 text-primary-content"
+        />
       </div>
       <div>
-        <h1 class="text-base font-bold leading-tight">AquaGestão</h1>
+        <h1 class="text-base font-bold leading-tight">
+          AquaGestão
+        </h1>
         <p class="text-[10px] uppercase tracking-widest opacity-50">
           Piscicultura
         </p>
@@ -72,7 +77,10 @@ watch(
 
     <nav class="flex-1 px-3 py-4">
       <ul class="space-y-1">
-        <li v-for="item in paths" :key="item.title">
+        <li
+          v-for="item in paths"
+          :key="item.title"
+        >
           <router-link
             :to="item.path"
             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 cursor-pointer"
@@ -82,7 +90,10 @@ watch(
                 : 'hover:bg-base-300 opacity-70 hover:opacity-100'
             "
           >
-            <Icon :icon="item.icon" class="size-5" />
+            <Icon
+              :icon="item.icon"
+              class="size-5"
+            />
             {{ item.title }}
           </router-link>
         </li>
@@ -96,7 +107,10 @@ watch(
         class="btn btn-ghost btn-sm w-full justify-start gap-3 opacity-70 hover:opacity-100"
         @click="handleLogout"
       >
-        <Icon icon="mdi:logout" class="size-5" />
+        <Icon
+          icon="mdi:logout"
+          class="size-5"
+        />
         Sair
       </button>
     </div>
@@ -120,10 +134,15 @@ watch(
         <div class="flex items-center justify-between px-6 py-6">
           <div class="flex items-center gap-3">
             <div class="bg-primary rounded-xl p-2">
-              <Icon icon="mdi:fish" class="size-6 text-primary-content" />
+              <Icon
+                icon="mdi:fish"
+                class="size-6 text-primary-content"
+              />
             </div>
             <div>
-              <h1 class="text-base font-bold leading-tight">AquaGestão</h1>
+              <h1 class="text-base font-bold leading-tight">
+                AquaGestão
+              </h1>
               <p class="text-[10px] uppercase tracking-widest opacity-50">
                 Piscicultura
               </p>
@@ -133,7 +152,10 @@ watch(
             class="btn btn-ghost btn-sm btn-circle"
             @click="store.closeSidebar"
           >
-            <Icon icon="mdi:close" class="size-5" />
+            <Icon
+              icon="mdi:close"
+              class="size-5"
+            />
           </button>
         </div>
 
@@ -141,7 +163,10 @@ watch(
 
         <nav class="flex-1 px-3 py-4">
           <ul class="space-y-1">
-            <li v-for="item in paths" :key="item.title">
+            <li
+              v-for="item in paths"
+              :key="item.title"
+            >
               <button
                 class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 w-full text-left"
                 :class="
@@ -151,7 +176,10 @@ watch(
                 "
                 @click="navigate(item.path)"
               >
-                <Icon :icon="item.icon" class="size-5" />
+                <Icon
+                  :icon="item.icon"
+                  class="size-5"
+                />
                 {{ item.title }}
               </button>
             </li>
@@ -165,7 +193,10 @@ watch(
             class="btn btn-ghost btn-sm w-full justify-start gap-3 opacity-70 hover:opacity-100"
             @click="handleLogout"
           >
-            <Icon icon="mdi:logout" class="size-5" />
+            <Icon
+              icon="mdi:logout"
+              class="size-5"
+            />
             Sair
           </button>
         </div>

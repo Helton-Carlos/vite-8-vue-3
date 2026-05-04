@@ -20,13 +20,19 @@ const isDark = computed(() => store.theme === 'dark');
         class="btn btn-ghost btn-sm btn-circle lg:hidden"
         @click="store.toggleSidebar"
       >
-        <Icon icon="mdi:menu" class="size-5" />
+        <Icon
+          icon="mdi:menu"
+          class="size-5"
+        />
       </button>
 
       <div class="text-sm breadcrumbs">
         <ul>
           <li>
-            <Icon icon="mdi:home" class="size-4 opacity-50" />
+            <Icon
+              icon="mdi:home"
+              class="size-4 opacity-50"
+            />
           </li>
           <li class="font-semibold">
             {{ title }}
@@ -41,9 +47,15 @@ const isDark = computed(() => store.theme === 'dark');
           type="checkbox"
           :checked="isDark"
           @change="store.toggleTheme()"
+        >
+        <Icon
+          icon="mdi:weather-sunny"
+          class="swap-off size-5"
         />
-        <Icon icon="mdi:weather-sunny" class="swap-off size-5" />
-        <Icon icon="mdi:weather-night" class="swap-on size-5" />
+        <Icon
+          icon="mdi:weather-night"
+          class="swap-on size-5"
+        />
       </label>
 
       <div class="avatar placeholder">

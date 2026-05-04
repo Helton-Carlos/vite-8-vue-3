@@ -38,7 +38,10 @@ const colorClasses: Record<string, { text: string; bg: string }> = {
     class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow duration-200"
   >
     <div class="card-body p-5 flex-row items-center gap-4">
-      <div class="rounded-xl p-4" :class="colorClasses[color || 'primary'].bg">
+      <div
+        class="rounded-xl p-4"
+        :class="colorClasses[color || 'primary'].bg"
+      >
         <Icon
           :icon="icon"
           class="size-8"
@@ -57,7 +60,10 @@ const colorClasses: Record<string, { text: string; bg: string }> = {
         >
           {{ value }}
         </p>
-        <p v-if="description" class="text-xs opacity-50 mt-0.5">
+        <p
+          v-if="description"
+          class="text-xs opacity-50 mt-0.5"
+        >
           {{ description }}
         </p>
       </div>

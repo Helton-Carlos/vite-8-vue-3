@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import BaseButton from '../components/base-button/BaseButton.vue';
-import { useRouter } from 'vue-router';
-import { toast } from 'vue3-toastify';
-import { ref } from 'vue';
-import { useStore } from '../stores/useStore';
-import { Icon } from '@iconify/vue';
+import BaseButton from "../components/base-button/BaseButton.vue";
+import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
+import { ref } from "vue";
+import { useStore } from "../stores/useStore";
+import { Icon } from "@iconify/vue";
 
 const store = useStore();
 const router = useRouter();
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 const showPassword = ref(false);
 
 function submit() {
   if (!email.value || !password.value) {
-    toast.error('Preencha os campos corretamente', {
-      progressClassName: 'bg-red-500',
+    toast.error("Preencha os campos corretamente", {
+      progressClassName: "bg-red-500",
       position: toast.POSITION.BOTTOM_RIGHT,
     });
     return;
@@ -23,12 +23,12 @@ function submit() {
 
   store.setUser(email.value);
 
-  toast.success('Bem-vindo ao AquaGestão!', {
-    progressClassName: 'bg-green-500',
+  toast.success("Bem-vindo ao AquaGestão!", {
+    progressClassName: "bg-green-500",
     position: toast.POSITION.BOTTOM_RIGHT,
   });
 
-  router.push({ name: 'dashboard' });
+  router.push({ name: "dashboard" });
 }
 </script>
 
@@ -82,13 +82,13 @@ function submit() {
         </p>
       </div>
 
-      <div class="form-control">
+      <div>
         <label class="label">
           <span
             class="label-text text-xs font-medium uppercase tracking-wide opacity-60"
           >E-mail</span>
         </label>
-        <label class="input input-bordered flex items-center gap-2">
+        <label class="input input-bordered flex items-center gap-2 w-full">
           <Icon
             icon="mdi:email-outline"
             class="size-4 opacity-40"
@@ -97,18 +97,17 @@ function submit() {
             v-model="email"
             type="email"
             placeholder="seu@email.com"
-            class="grow"
           >
         </label>
       </div>
 
-      <div class="form-control">
+      <div>
         <label class="label">
           <span
             class="label-text text-xs font-medium uppercase tracking-wide opacity-60"
           >Senha</span>
         </label>
-        <label class="input input-bordered flex items-center gap-2">
+        <label class="input input-bordered flex items-center gap-2 w-full">
           <Icon
             icon="mdi:lock-outline"
             class="size-4 opacity-40"
@@ -117,7 +116,6 @@ function submit() {
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
             placeholder="••••••••"
-            class="grow"
           >
           <button
             type="button"

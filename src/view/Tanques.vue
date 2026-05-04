@@ -162,12 +162,14 @@ function cancelDelete() {
           <span
             class="badge badge-xs"
             :class="filterStatus === status ? 'badge-primary-content' : ''"
-            >{{ count }}</span
-          >
+          >{{ count }}</span>
         </button>
       </div>
       <BaseButton @click="openForm">
-        <Icon icon="mdi:plus" class="icon" />
+        <Icon
+          icon="mdi:plus"
+          class="icon"
+        />
         Novo Tanque
       </BaseButton>
     </div>
@@ -199,27 +201,45 @@ function cancelDelete() {
 
           <div class="grid grid-cols-2 gap-x-3 gap-y-1.5 text-xs">
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:cube-outline" class="size-5" />
+              <Icon
+                icon="mdi:cube-outline"
+                class="size-5"
+              />
               <span>{{ tank.type }}</span>
             </div>
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:water" class="size-5" />
+              <Icon
+                icon="mdi:water"
+                class="size-5"
+              />
               <span>{{ tank.volumeM3 }} m³</span>
             </div>
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:fish" class="size-5" />
+              <Icon
+                icon="mdi:fish"
+                class="size-5"
+              />
               <span>{{ tank.speciesName }}</span>
             </div>
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:counter" class="size-5" />
+              <Icon
+                icon="mdi:counter"
+                class="size-5"
+              />
               <span>{{ tank.fishCount.toLocaleString('pt-BR') }}</span>
             </div>
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:ruler-square" class="size-5" />
+              <Icon
+                icon="mdi:ruler-square"
+                class="size-5"
+              />
               <span>{{ tank.densityPerM3 }}/m³</span>
             </div>
             <div class="flex items-center gap-2 opacity-70">
-              <Icon icon="mdi:broom" class="size-5" />
+              <Icon
+                icon="mdi:broom"
+                class="size-5"
+              />
               <span>{{ tank.lastCleaningDate }}</span>
             </div>
           </div>
@@ -229,9 +249,14 @@ function cancelDelete() {
               class="btn btn-xs btn-ghost opacity-50 hover:opacity-100"
               @click="openDeleteConfirm(tank.id)"
             >
-              <Icon icon="mdi:delete-outline" class="size-4 text-error" />
+              <Icon
+                icon="mdi:delete-outline"
+                class="size-4 text-error"
+              />
 
-              <p class="text-base text-error">excluir</p>
+              <p class="text-base text-error">
+                excluir
+              </p>
             </button>
           </div>
         </div>
@@ -241,87 +266,107 @@ function cancelDelete() {
     <div class="card bg-base-200 shadow-sm">
       <div class="card-body">
         <h2 class="card-title text-sm font-semibold">
-          <Icon icon="mdi:table" class="size-4 opacity-60" />
+          <Icon
+            icon="mdi:table"
+            class="size-4 opacity-60"
+          />
           Visão em Tabela
         </h2>
-        <BaseTable :columns="columns" :rows="filteredTanks" />
+        <BaseTable
+          :columns="columns"
+          :rows="filteredTanks"
+        />
       </div>
     </div>
 
-    <BaseModal id="tank-modal" title="Novo Tanque" size="md" @close="closeForm">
+    <BaseModal
+      id="tank-modal"
+      title="Novo Tanque"
+      size="md"
+      @close="closeForm"
+    >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium">Nome *</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Nome *</span></label>
           <input
             v-model="form.name"
             type="text"
             placeholder="Ex: Tanque G1"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium">Tipo</span></label
+          <label class="label"><span class="label-text text-xs font-medium">Tipo</span></label>
+          <select
+            v-model="form.type"
+            class="select select-bordered w-full"
           >
-          <select v-model="form.type" class="select select-bordered w-full">
-            <option value="escavado">Escavado</option>
-            <option value="alvenaria">Alvenaria</option>
-            <option value="tanque-rede">Tanque-rede</option>
-            <option value="raceway">Raceway</option>
+            <option value="escavado">
+              Escavado
+            </option>
+            <option value="alvenaria">
+              Alvenaria
+            </option>
+            <option value="tanque-rede">
+              Tanque-rede
+            </option>
+            <option value="raceway">
+              Raceway
+            </option>
           </select>
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium"
-              >Volume (m³) *</span
-            ></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Volume (m³) *</span></label>
           <input
             v-model.number="form.volumeM3"
             type="number"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium">Espécie</span></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Espécie</span></label>
           <input
             v-model="form.speciesName"
             type="text"
             placeholder="Ex: Tilápia"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium"
-              >Qtd. Peixes</span
-            ></label
-          >
+          <label class="label"><span class="label-text text-xs font-medium">Qtd. Peixes</span></label>
           <input
             v-model.number="form.fishCount"
             type="number"
             class="input input-bordered w-full"
-          />
+          >
         </div>
         <div class="form-control">
-          <label class="label"
-            ><span class="label-text text-xs font-medium">Status</span></label
+          <label class="label"><span class="label-text text-xs font-medium">Status</span></label>
+          <select
+            v-model="form.status"
+            class="select select-bordered w-full"
           >
-          <select v-model="form.status" class="select select-bordered w-full">
-            <option value="vazio">Vazio</option>
-            <option value="ativo">Ativo</option>
-            <option value="manutenção">Manutenção</option>
-            <option value="quarentena">Quarentena</option>
+            <option value="vazio">
+              Vazio
+            </option>
+            <option value="ativo">
+              Ativo
+            </option>
+            <option value="manutenção">
+              Manutenção
+            </option>
+            <option value="quarentena">
+              Quarentena
+            </option>
           </select>
         </div>
       </div>
       <div class="modal-action">
         <BaseButton @click="saveTank">
-          <Icon icon="mdi:content-save" class="icon" />
+          <Icon
+            icon="mdi:content-save"
+            class="icon"
+          />
           Salvar
         </BaseButton>
       </div>
@@ -332,21 +377,39 @@ function cancelDelete() {
       class="modal modal-bottom sm:modal-middle"
     >
       <div class="modal-box bg-base-200">
-        <h3 class="text-lg font-bold mb-2">Confirmar exclusão</h3>
+        <h3 class="text-lg font-bold mb-2">
+          Confirmar exclusão
+        </h3>
         <p class="text-sm opacity-70">
           Tem certeza que deseja excluir este tanque? Esta ação não pode ser
           desfeita.
         </p>
         <div class="modal-action">
-          <button class="btn btn-ghost" @click="cancelDelete">Cancelar</button>
-          <button class="btn btn-error" @click="confirmDelete">
-            <Icon icon="mdi:delete-outline" class="size-4" />
+          <button
+            class="btn btn-ghost"
+            @click="cancelDelete"
+          >
+            Cancelar
+          </button>
+          <button
+            class="btn btn-error"
+            @click="confirmDelete"
+          >
+            <Icon
+              icon="mdi:delete-outline"
+              class="size-4"
+            />
             Excluir
           </button>
         </div>
       </div>
-      <form method="dialog" class="modal-backdrop">
-        <button @click="cancelDelete">close</button>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button @click="cancelDelete">
+          close
+        </button>
       </form>
     </dialog>
   </div>

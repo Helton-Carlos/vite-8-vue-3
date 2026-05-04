@@ -88,7 +88,10 @@ const alertColumns = [
       <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
           <h2 class="card-title text-sm font-semibold">
-            <Icon icon="mdi:trending-up" class="size-4 text-success" />
+            <Icon
+              icon="mdi:trending-up"
+              class="size-4 text-success"
+            />
             Crescimento Médio (kg)
           </h2>
           <div class="overflow-x-auto">
@@ -108,13 +111,9 @@ const alertColumns = [
             </Chart>
           </div>
           <div class="flex gap-4 text-xs opacity-60 mt-1">
-            <span class="flex items-center gap-1"
-              ><span class="w-3 h-0.5 bg-current inline-block" /> Real</span
-            >
-            <span class="flex items-center gap-1"
-              ><span class="w-3 h-0.5 bg-success inline-block border-dashed" />
-              Meta</span
-            >
+            <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-current inline-block" /> Real</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-success inline-block border-dashed" />
+              Meta</span>
           </div>
         </div>
       </div>
@@ -122,7 +121,10 @@ const alertColumns = [
       <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
           <h2 class="card-title text-sm font-semibold">
-            <Icon icon="mdi:trending-down" class="size-4 text-error" />
+            <Icon
+              icon="mdi:trending-down"
+              class="size-4 text-error"
+            />
             Mortalidade Mensal
           </h2>
           <div class="overflow-x-auto">
@@ -148,17 +150,26 @@ const alertColumns = [
       <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
           <h2 class="card-title text-sm font-semibold">
-            <Icon icon="mdi:alert-outline" class="size-4 text-warning" />
+            <Icon
+              icon="mdi:alert-outline"
+              class="size-4 text-warning"
+            />
             Alertas de Qualidade da Água
           </h2>
-          <BaseTable :columns="alertColumns" :rows="alerts" />
+          <BaseTable
+            :columns="alertColumns"
+            :rows="alerts"
+          />
         </div>
       </div>
 
       <div class="card bg-base-200 shadow-sm hover:shadow-md transition-shadow">
         <div class="card-body">
           <h2 class="card-title text-sm font-semibold">
-            <Icon icon="mdi:history" class="size-4 text-info" />
+            <Icon
+              icon="mdi:history"
+              class="size-4 text-info"
+            />
             Atividades Recentes
           </h2>
           <ul class="space-y-2 mt-2">
@@ -167,8 +178,14 @@ const alertColumns = [
               :key="activity.id"
               class="flex items-center gap-3 p-2.5 rounded-lg bg-base-300/30 hover:bg-base-300/50 transition-colors"
             >
-              <div class="rounded-lg p-2" :class="activityBg[activity.type]">
-                <Icon :icon="activityIcons[activity.type]" class="size-4" />
+              <div
+                class="rounded-lg p-2"
+                :class="activityBg[activity.type]"
+              >
+                <Icon
+                  :icon="activityIcons[activity.type]"
+                  class="size-4"
+                />
               </div>
               <div class="flex-1 min-w-0">
                 <p class="text-sm truncate">
