@@ -1,34 +1,24 @@
 <script setup lang="ts">
-defineProps<{
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'accent'
-    | 'info'
-    | 'success'
-    | 'warning'
-    | 'error'
-    | 'ghost';
-  size?: 'xs' | 'sm' | 'md' | 'lg';
-  outline?: boolean;
-}>();
+import type { BaseBadgeProps } from "./types";
+
+defineProps<BaseBadgeProps>();
 
 const variantMap: Record<string, string> = {
-  primary: 'badge-primary',
-  secondary: 'badge-secondary',
-  accent: 'badge-accent',
-  info: 'badge-info',
-  success: 'badge-success',
-  warning: 'badge-warning',
-  error: 'badge-error',
-  ghost: 'badge-ghost',
+  primary: "badge-primary",
+  secondary: "badge-secondary",
+  accent: "badge-accent",
+  info: "badge-info",
+  success: "badge-success",
+  warning: "badge-warning",
+  error: "badge-error",
+  ghost: "badge-ghost",
 };
 
 const sizeMap: Record<string, string> = {
-  xs: 'badge-xs',
-  sm: 'badge-sm',
-  md: '',
-  lg: 'badge-lg',
+  xs: "badge-xs",
+  sm: "badge-sm",
+  md: "",
+  lg: "badge-lg",
 };
 </script>
 
