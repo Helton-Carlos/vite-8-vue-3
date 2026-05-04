@@ -1,11 +1,9 @@
 <script setup lang="ts">
-defineProps<{
-  id: string;
-  title: string;
-  size?: 'sm' | 'md' | 'lg';
-}>();
+import type { BaseModalProps } from "./types";
 
-defineEmits(['close']);
+defineProps<BaseModalProps>();
+
+defineEmits(["close"]);
 </script>
 
 <template>
