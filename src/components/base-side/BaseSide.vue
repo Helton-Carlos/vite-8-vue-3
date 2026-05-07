@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { Icon } from '@iconify/vue';
-import { useStore } from '../../stores/useStore';
-import { useRouter, useRoute } from 'vue-router';
-import { toast } from 'vue3-toastify';
-import type { IconTypes } from './types';
+import { ref, watch } from "vue";
+import { Icon } from "@iconify/vue";
+import { useStore } from "../../stores/useStore";
+import { useRouter, useRoute } from "vue-router";
+import { toast } from "vue3-toastify";
+import type { IconTypes } from "./types";
 
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
 const paths = ref<IconTypes[]>([
-  { title: 'Dashboard', path: '/', icon: 'mdi:view-dashboard' },
-  { title: 'Tanques', path: '/tanques', icon: 'mdi:fishbowl-outline' },
-  { title: 'Espécies', path: '/especies', icon: 'mdi:fish' },
-  { title: 'Alimentação', path: '/alimentacao', icon: 'mdi:food-drumstick' },
+  { title: "Dashboard", path: "/", icon: "mdi:view-dashboard" },
+  { title: "Tanques", path: "/tanques", icon: "mdi:fishbowl-outline" },
+  { title: "Espécies", path: "/especies", icon: "mdi:fish" },
+  { title: "Alimentação", path: "/alimentacao", icon: "mdi:food-drumstick" },
   {
-    title: 'Qualidade da Água',
-    path: '/qualidade-agua',
-    icon: 'mdi:water-check',
+    title: "Qualidade da Água",
+    path: "/qualidade-agua",
+    icon: "mdi:water-check",
   },
-  { title: 'Colheitas', path: '/colheitas', icon: 'mdi:basket-outline' },
-  { title: 'Configurações', path: '/configuracoes', icon: 'mdi:cog-outline' },
+  { title: "Colheitas", path: "/colheitas", icon: "mdi:basket-outline" },
+  { title: "Configurações", path: "/configuracoes", icon: "mdi:cog-outline" },
 ]);
 
 function isActive(path: string) {
@@ -36,11 +36,11 @@ function navigate(path: string) {
 function handleLogout() {
   store.logout();
   store.closeSidebar();
-  toast.success('Logout realizado com sucesso', {
-    progressClassName: 'bg-green-500',
+  toast.success("Logout realizado com sucesso", {
+    progressClassName: "bg-green-500",
     position: toast.POSITION.BOTTOM_RIGHT,
   });
-  router.push('/login');
+  router.push("/login");
 }
 
 watch(
@@ -52,7 +52,6 @@ watch(
 </script>
 
 <template>
-  <!-- Desktop sidebar -->
   <aside
     class="hidden lg:flex w-[260px] h-dvh sticky top-0 flex-col bg-base-200 border-r border-base-300 overflow-y-auto"
   >
@@ -116,7 +115,6 @@ watch(
     </div>
   </aside>
 
-  <!-- Mobile overlay -->
   <Teleport to="body">
     <Transition name="fade">
       <div
