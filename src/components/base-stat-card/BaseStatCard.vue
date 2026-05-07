@@ -1,35 +1,20 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from "@iconify/vue";
+import type { BaseStatCardProps } from "./types";
 
-withDefaults(
-  defineProps<{
-    title: string;
-    value: string | number;
-    icon: string;
-    color?:
-      | 'primary'
-      | 'secondary'
-      | 'accent'
-      | 'info'
-      | 'success'
-      | 'warning'
-      | 'error';
-    description?: string;
-  }>(),
-  {
-    color: 'primary',
-    description: undefined,
-  },
-);
+withDefaults(defineProps<BaseStatCardProps>(), {
+  color: "primary",
+  description: undefined,
+});
 
 const colorClasses: Record<string, { text: string; bg: string }> = {
-  primary: { text: 'text-primary', bg: 'bg-primary/10' },
-  secondary: { text: 'text-secondary', bg: 'bg-secondary/10' },
-  accent: { text: 'text-accent', bg: 'bg-accent/10' },
-  info: { text: 'text-info', bg: 'bg-info/10' },
-  success: { text: 'text-success', bg: 'bg-success/10' },
-  warning: { text: 'text-warning', bg: 'bg-warning/10' },
-  error: { text: 'text-error', bg: 'bg-error/10' },
+  primary: { text: "text-primary", bg: "bg-primary/10" },
+  secondary: { text: "text-secondary", bg: "bg-secondary/10" },
+  accent: { text: "text-accent", bg: "bg-accent/10" },
+  info: { text: "text-info", bg: "bg-info/10" },
+  success: { text: "text-success", bg: "bg-success/10" },
+  warning: { text: "text-warning", bg: "bg-warning/10" },
+  error: { text: "text-error", bg: "bg-error/10" },
 };
 </script>
 
@@ -44,8 +29,8 @@ const colorClasses: Record<string, { text: string; bg: string }> = {
       >
         <Icon
           :icon="icon"
-          class="size-8"
           :class="colorClasses[color || 'primary'].text"
+          class="size-8"
         />
       </div>
       <div class="flex-1 min-w-0">
