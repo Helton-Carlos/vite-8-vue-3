@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { Chart, Grid, Line } from 'vue3-charts';
-import { Icon } from '@iconify/vue';
-import BaseTable from '../components/base-table/BaseTable.vue';
-import BaseButton from '../components/base-button/BaseButton.vue';
-import BaseModal from '../components/base-modal/BaseModal.vue';
-import BaseStatCard from '../components/base-stat-card/BaseStatCard.vue';
+import { ref, computed } from "vue";
+import { Chart, Grid, Line } from "vue3-charts";
+import { Icon } from "@iconify/vue";
+import BaseTable from "../components/base-table/BaseTable.vue";
+import BaseButton from "../components/base-button/BaseButton.vue";
+import BaseModal from "../components/base-modal/BaseModal.vue";
+import BaseStatCard from "../components/base-stat-card/BaseStatCard.vue";
 import {
   feedingRecords,
   feedingSummaryByMonth,
   type FeedingRecord,
-} from '../mocks/feeding';
-import { tanksList } from '../mocks/tanks';
-import { toast } from 'vue3-toastify';
+} from "../mocks/feeding";
+import { tanksList } from "../mocks/tanks";
+import { toast } from "vue3-toastify";
 
 const records = ref<FeedingRecord[]>([...feedingRecords]);
 const chartData = ref(feedingSummaryByMonth);
@@ -20,62 +20,62 @@ const margin = ref({ left: 0, top: 20, right: 20, bottom: 0 });
 
 const form = ref<Partial<FeedingRecord>>({
   tankId: undefined,
-  feedType: '',
+  feedType: "",
   quantityKg: 0,
-  date: new Date().toISOString().split('T')[0],
-  time: '07:00',
-  responsible: '',
-  observations: '',
+  date: new Date().toISOString().split("T")[0],
+  time: "07:00",
+  responsible: "",
+  observations: "",
 });
 
 const activeTanks = tanksList.filter(
-  (t) => t.status === 'ativo' || t.status === 'quarentena',
+  (t) => t.status === "ativo" || t.status === "quarentena",
 );
 
 const todayTotal = computed(() =>
   records.value
-    .filter((r) => r.date === new Date().toISOString().split('T')[0])
+    .filter((r) => r.date === new Date().toISOString().split("T")[0])
     .reduce((sum, r) => sum + r.quantityKg, 0),
 );
 
 const todayFeedings = computed(
   () =>
     records.value.filter(
-      (r) => r.date === new Date().toISOString().split('T')[0],
+      (r) => r.date === new Date().toISOString().split("T")[0],
     ).length,
 );
 
 const columns = [
-  { name: 'tankName', label: 'Tanque' },
-  { name: 'speciesName', label: 'Espécie' },
-  { name: 'feedType', label: 'Ração' },
-  { name: 'quantityKg', label: 'Qtd (kg)' },
-  { name: 'date', label: 'Data' },
-  { name: 'time', label: 'Hora' },
-  { name: 'responsible', label: 'Responsável' },
-  { name: 'observations', label: 'Observações' },
+  { name: "tankName", label: "Tanque" },
+  { name: "speciesName", label: "Espécie" },
+  { name: "feedType", label: "Ração" },
+  { name: "quantityKg", label: "Qtd (kg)" },
+  { name: "date", label: "Data" },
+  { name: "time", label: "Hora" },
+  { name: "responsible", label: "Responsável" },
+  { name: "observations", label: "Observações" },
 ];
 
 function openForm() {
-  const modal = document.getElementById('feeding-modal') as HTMLDialogElement;
+  const modal = document.getElementById("feeding-modal") as HTMLDialogElement;
   modal?.showModal();
 }
 
 function closeForm() {
   form.value = {
     tankId: undefined,
-    feedType: '',
+    feedType: "",
     quantityKg: 0,
-    date: new Date().toISOString().split('T')[0],
-    time: '07:00',
-    responsible: '',
-    observations: '',
+    date: new Date().toISOString().split("T")[0],
+    time: "07:00",
+    responsible: "",
+    observations: "",
   };
 }
 
 function saveFeeding() {
   if (!form.value.tankId || !form.value.quantityKg || !form.value.responsible) {
-    toast.error('Preencha os campos obrigatórios', {
+    toast.error("Preencha os campos obrigatórios", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
     return;
@@ -86,21 +86,21 @@ function saveFeeding() {
   const newRecord: FeedingRecord = {
     id: records.value.length + 1,
     tankId: form.value.tankId!,
-    tankName: tank?.name || '',
-    speciesName: tank?.speciesName || '',
-    feedType: form.value.feedType || '',
+    tankName: tank?.name || "",
+    speciesName: tank?.speciesName || "",
+    feedType: form.value.feedType || "",
     quantityKg: form.value.quantityKg!,
     date: form.value.date!,
     time: form.value.time!,
     responsible: form.value.responsible!,
-    observations: form.value.observations || '',
+    observations: form.value.observations || "",
   };
 
   records.value.unshift(newRecord);
-  toast.success('Alimentação registrada', {
+  toast.success("Alimentação registrada", {
     position: toast.POSITION.BOTTOM_RIGHT,
   });
-  const modal = document.getElementById('feeding-modal') as HTMLDialogElement;
+  const modal = document.getElementById("feeding-modal") as HTMLDialogElement;
   modal?.close();
   closeForm();
 }
@@ -110,6 +110,7 @@ function saveFeeding() {
   <div class="space-y-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <BaseStatCard
+        data-test-id="stat-card"
         title="Ração Hoje"
         :value="`${todayTotal} kg`"
         icon="mdi:fish-food"
@@ -139,6 +140,7 @@ function saveFeeding() {
           Consumo de Ração Mensal (kg)
         </h2>
         <Chart
+          data-test-id="graf-chart"
           :size="{ width: 700, height: 220 }"
           :data="chartData"
           :margin="margin"
@@ -179,6 +181,7 @@ function saveFeeding() {
 
     <BaseModal
       id="feeding-modal"
+      data-test-id="base-modal"
       title="Registrar Alimentação"
       size="md"
       @close="closeForm"

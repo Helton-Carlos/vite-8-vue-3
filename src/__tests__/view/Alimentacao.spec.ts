@@ -16,4 +16,14 @@ describe("Alimentacao.vue", () => {
 
     expect(element).toBeTruthy();
   });
+
+  test("renders the page with test ids", async () => {
+    const wrapper = await render(Alimentacao);
+
+    const element = wrapper.findByTestId("stat-card");
+    const chart = wrapper.findByTestId("graf-chart");
+
+    expect(chart).toBeTruthy();
+    expect(element).toBeTruthy();
+  });
 });
