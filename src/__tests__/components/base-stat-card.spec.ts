@@ -1,11 +1,18 @@
-import { screen } from "@testing-library/vue";
 import { describe, expect, test } from "vitest";
 import BaseStatCard from "../../components/base-stat-card/BaseStatCard.vue";
 import { renderComponent } from "../helpers/render-utils";
 
 describe("BaseStatCard.vue", () => {
   test("renders the BaseStatCard with default type", async () => {
-    const baseStatCard = renderComponent(BaseStatCard);
+    const baseStatCard = renderComponent(BaseStatCard, {
+      props: {
+        title: "Test Stat Card",
+        value: "123",
+        icon: "mdi:chart-bar",
+        color: "success",
+        description: "This is a test stat card",
+      },
+    });
 
     expect(baseStatCard).toBeTruthy();
   });
