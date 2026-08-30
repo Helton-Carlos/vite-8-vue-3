@@ -1,11 +1,13 @@
-export const tableColumns = [
+import type { TableColumn, TankRow } from '../components/base-table/types';
+
+export const tableColumns: TableColumn[] = [
   { name: 'tankName', label: 'Tanque' },
   { name: 'speciesName', label: 'Espécie' },
   { name: 'fishCount', label: 'Peixes' },
   { name: 'status', label: 'Status' },
 ];
 
-export const tableRows = [
+export const tableRows: TankRow[] = [
   {
     id: 1,
     tankName: 'Tanque A1',
